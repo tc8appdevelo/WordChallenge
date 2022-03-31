@@ -49,7 +49,9 @@ function countReplace(content, wrd1, wrd2) {
 }
 
 // Figure out best way to separate and replace in situation
-// where word1 has not been separated into its own array element
+// where word1 has not been split into its own array element
+// Try getting indicies of start and end and slicing/splicing
+// to replace with word2
 function formatText(str, wrd1, wrd2) {
   let alphabet = "abcdefghijklmnopqrstuvwxyz";
   let formattedStr = "";
