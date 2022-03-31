@@ -44,8 +44,8 @@ function countReplace(content, wrd1, wrd2) {
   }
   console.log(`Found ${count} occurences of ${wrd1}`);
   console.log(`Replaced all occurances of ${wrd1} with ${wrd2}`);
-  console.log(arr);
-  // console.log(arr.join(" "));
+  // console.log(arr);
+  console.log(arr.join(" "));
 }
 
 // Figure out best way to separate and replace in situation
