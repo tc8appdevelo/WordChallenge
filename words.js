@@ -5,9 +5,6 @@ const url = argv[2];
 const word1 = argv[3];
 const word2 = argv[4];
 
-// console.log(url);
-// console.log(word);
-
 function fetchData() {
   console.log(`Downloading source of ${url}`)
   fetch(url)
@@ -16,12 +13,6 @@ function fetchData() {
     }));
 }
 
-let pageText = "Hello hello hello heLLO HELLO world WORLD world woRLD world aaa aaa bbb bbb bbb BB";
-
-// Are words only alphabetical characters?
-// If someone searches href="https://..." should it count those?
-// Do word search based on alphabet, if that works
-// think of total string search.
 
 // First decide how to separate words from other characters.
 // Split on space but also replace all punctuation with "" or " ".
@@ -46,31 +37,39 @@ function countReplace(content, wrd1, wrd2) {
     if (str === wrd1.toLowerCase()) {
       count += 1;
       arr[i] = wrd2;
+    } else if (str.includes(wrd1.toLowerCase())) {
+      count += 1;
+      // arr[i] = formatText(str, wrd1, wrd2)
     }
-
-    // if (str.includes(wrd1.toLowerCase())) {
-    //   console.log(str);
-    // }
-
-    
   }
   console.log(`Found ${count} occurences of ${wrd1}`);
+  console.log(`Replaced all occurances of ${wrd1} with ${wrd2}`);
   console.log(arr);
+  // console.log(arr.join(" "));
 }
 
-function formatText(str) {
+// Figure out best way to separate and replace in situation
+// where word1 has not been separated into its own array element
+function formatText(str, wrd1, wrd2) {
   let alphabet = "abcdefghijklmnopqrstuvwxyz";
   let formattedStr = "";
+  let startIdx = -1;
+  let endIdx = -1;
+
+  let arr = str.split(wrd1[0].toLowerCase())
+  console.log(arr)
 
   for (let i = 0; i < str.length; i++) {
     let lowerStr = str[i].toLowerCase();
-    if (alphabet.includes(lowerStr)) {
-      formattedStr += lowerStr;
+    if (lowerStr === wrd1[0].toLowerCase()) {
+      if (startIdx === -1) {
+        startIdx = i;
+      } 
+    } else if (startIdx > -1) {
+      endIdx = i;
     }
   }
   console.log(formattedStr);
 }
 
-// formatText("hell!o0i%");
-// countReplace(pageText, "Hello");
 fetchData();
